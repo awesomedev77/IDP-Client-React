@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { Header } from "../components/Header";
-import { Pagination } from "../components/Pagination";
 import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router-dom";
-import { User } from "../utils/interface";
-import { UserItem } from "../components/UserItem";
+import { Type } from "../utils/interface";
 import api from "../api/axios";
-import CreateUserModal from "../components/CreateUserModal";
+import { TypeItem } from "../components/TypeItem";
+import CreateTypeModal from "../components/CreateTypeModal";
 
-export const Admin: React.FC = () => {
-  const itemsPerPage = 10;
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalItems, setTotalItems] = useState(0);
+export const DocumentType: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const [items, setItems] = useState<User[]>([]);
+  const [items, setItems] = useState<Type[]>([]);
   const { isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -26,10 +21,9 @@ export const Admin: React.FC = () => {
   }, [isAuthenticated, navigate]);
   useEffect(() => {
     api
-      .get("/auth/getAll?page=1&limit=10")
+      .get("/type/getAll")
       .then((res) => {
-        setTotalItems(res.data.total);
-        setItems(res.data.data);
+        setItems(res.data);
       })
       .catch((error) => {
         if (error.response && error.response.status === 401) {
@@ -40,27 +34,11 @@ export const Admin: React.FC = () => {
       });
   }, []);
 
-  useEffect(() => {
-    api
-      .get(`/auth/getAll?page=${currentPage}&limit=${itemsPerPage}`)
-      .then((res) => {
-        setTotalItems(res.data.total);
-        setItems(res.data.data);
-      })
-      .catch((error) => {
-        if (error.response && error.response.status === 401) {
-          console.log(error);
-          localStorage.removeItem("auth-storage");
-          window.location.href = "/login";
-        }
-      });
-  }, [currentPage]);
   const refreshPage = async () => {
     api
-      .get(`/auth/getAll?page=${currentPage}&limit=${itemsPerPage}`)
+      .get(`/type/getAll`)
       .then((res) => {
-        setTotalItems(res.data.total);
-        setItems(res.data.data);
+        setItems(res.data);
       })
       .catch((error) => {
         if (error.response && error.response.status === 401) {
@@ -71,9 +49,6 @@ export const Admin: React.FC = () => {
       });
   };
 
-  const changePage = (page: number) => {
-    setCurrentPage(page);
-  };
   const handleClose = () => {
     setShowModal(false);
   };
@@ -84,9 +59,7 @@ export const Admin: React.FC = () => {
       <div className="flex flex-col grow py-5 gap-[38px]">
         <Header />
         <div className="flex justify-between">
-          <p className="text-[24px] font-bold ms-[30px]">
-            IDP Loan Users
-          </p>
+          <p className="text-[24px] font-bold ms-[30px]">IDP Types</p>
           <button
             onClick={() => {
               setShowModal(true);
@@ -111,13 +84,7 @@ export const Admin: React.FC = () => {
                         No
                       </th>
                       <th scope="col" className="px-6 py-3">
-                        Full Name
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        Email
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        Role
+                        Type Name
                       </th>
                       <th scope="col" className="px-6 py-3">
                         <span className="sr-only">Edit</span>
@@ -126,10 +93,10 @@ export const Admin: React.FC = () => {
                   </thead>
                   <tbody>
                     {items.map((item, index) => (
-                      <UserItem
-                        no={itemsPerPage * (currentPage - 1) + index + 1}
+                      <TypeItem
+                        no={index + 1}
                         key={`useritem-${item.id}`}
-                        user={item}
+                        type={item}
                         refreshPage={refreshPage}
                       />
                     ))}
@@ -139,16 +106,11 @@ export const Admin: React.FC = () => {
               <div className="">
                 <div className="grid grid-cols-3 gap-4"></div>
               </div>
-              <Pagination
-                currentPage={currentPage}
-                changePage={changePage}
-                totalPages={totalPages}
-              />
             </>
           )}
         </div>
       </div>
-      <CreateUserModal
+      <CreateTypeModal
         key={Math.random()}
         show={showModal}
         onClose={handleClose}

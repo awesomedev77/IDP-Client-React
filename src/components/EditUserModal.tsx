@@ -151,20 +151,25 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
             )}
           </div>
           <div className="mb-4">
-            <Input
-              type="text"
+            <select
+              className="rounded-md  w-full border sm:text-sm px-2 py-2 border-gray-300 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 block p-2.5"
               value={role}
-              error={!!errors.role}
-              placeholder="Description"
-              handleChange={(e) => {
+              onChange={(e) => {
                 setRole(e.target.value);
                 if (!isNotEmpty(e.target.value)) {
-                  setErrors({ ...errors, role: "Description is required" });
+                  setErrors({ ...errors, role: "role is required" });
                 } else {
                   setErrors({ ...errors, role: "" });
                 }
               }}
-            />
+              name="role"
+              id=""
+            >
+              <option value="">Slect Role</option>
+              <option value="Admin">Admin</option>
+              <option value="Manager">Manager</option>
+              <option value="User">User</option>
+            </select>
             {errors.role && (
               <p className="text-red-500 text-xs">{errors.role}</p>
             )}

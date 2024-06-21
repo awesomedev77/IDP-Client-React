@@ -100,12 +100,12 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({ show, onClose }) => {
         onClick={onClose}
       ></div>
       <div className="relative my-auto mx-auto p-5 border w-[520px] shadow-lg rounded-[14px] bg-white">
-        <div className="mb-5 flex justify-evenly items-center">
+        <div className="mb-5 flex justify-center items-center gap-4">
           <div className="">
             <img alt="" className="h-14 w-14" src={logo} />
           </div>
           <h2 className="text-center text-3xl font-extrabold text-gray-900">
-            Create Loan User
+            Create IDP User
           </h2>
         </div>
         {error && error !== "" && (
@@ -156,20 +156,25 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({ show, onClose }) => {
             )}
           </div>
           <div className="mb-4">
-            <Input
-              type="text"
+            <select
+              className="rounded-md  w-full border sm:text-sm px-2 py-2 border-gray-300 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 block p-2.5"
               value={role}
-              error={!!errors.role}
-              placeholder="Description"
-              handleChange={(e) => {
+              onChange={(e) => {
                 setRole(e.target.value);
                 if (!isNotEmpty(e.target.value)) {
-                  setErrors({ ...errors, role: "Description is required" });
+                  setErrors({ ...errors, role: "role is required" });
                 } else {
                   setErrors({ ...errors, role: "" });
                 }
               }}
-            />
+              name="role"
+              id=""
+            >
+              <option value="">Slect Role</option>
+              <option value="Admin">Admin</option>
+              <option value="Manager">Manager</option>
+              <option value="User">User</option>
+            </select>
             {errors.role && (
               <p className="text-red-500 text-xs">{errors.role}</p>
             )}

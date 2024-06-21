@@ -1,11 +1,3 @@
-export type DocumentProps = {
-  id: string;
-  path: string;
-  status: string;
-  application_id: string;
-}
-
-
 export type ApplicationProps = {
   applicantDescription: string;
   applicantEmail: string;
@@ -35,7 +27,28 @@ export type User = {
   fullName: string;
   role: string;
 }
+export type Type = {
+  id: string;
+  typeName: string;
+}
+export type Process = {
+  id: string;
+  processName: string;
+  processDescription: string;
+  creator?: any;
+  createdAt: string;
+  documents: DocumentProps[];
+}
 
+export type DocumentProps = {
+  id: string;
+  path: string;
+  status: string;
+  process: Process;
+  createdAt: string;
+  creator: User;
+  documentType: Type;
+}
 
 export type ReportProps = {
   documentType?: string;

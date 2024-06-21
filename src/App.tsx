@@ -10,6 +10,8 @@ import NotFoundPage from "./pages/NotFound";
 import { Detail } from "./pages/Detail";
 import AdminRoute from "./components/AdminRoute";
 import { Admin } from "./pages/Admin";
+import { DocumentProcess } from "./pages/Process";
+import { DocumentType } from "./pages/DocumentType";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           </Route>
           <Route element={<AdminRoute />}>
             <Route path="/admin" element={<Admin />} />
+            <Route path="/process" element={<DocumentProcess />} />
+            <Route path="/type" element={<DocumentType />} />
           </Route>
           <Route element={<PrivateRoute />}>
             <Route path="/" element={<Home />} />
