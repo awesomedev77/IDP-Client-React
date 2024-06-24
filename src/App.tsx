@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import AuthRoute from "./components/AuthRoute";
 import NotFoundPage from "./pages/NotFound";
+import { Details } from "./pages/Details";
 import { Detail } from "./pages/Detail";
 import AdminRoute from "./components/AdminRoute";
 import { Admin } from "./pages/Admin";
@@ -24,11 +25,12 @@ function App() {
           </Route>
           <Route element={<AdminRoute />}>
             <Route path="/admin" element={<Admin />} />
-            <Route path="/process" element={<DocumentProcess />} />
             <Route path="/type" element={<DocumentType />} />
           </Route>
           <Route element={<PrivateRoute />}>
+            <Route path="/process" element={<DocumentProcess />} />
             <Route path="/" element={<Home />} />
+            <Route path="/details/:id" element={<Details />} />
             <Route path="/detail/:id" element={<Detail />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />

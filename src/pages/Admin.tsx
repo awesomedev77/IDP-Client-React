@@ -17,6 +17,7 @@ export const Admin: React.FC = () => {
   const [items, setItems] = useState<User[]>([]);
   const { isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
+  const [query, setQuery] = useState("");
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   useEffect(() => {
@@ -42,7 +43,9 @@ export const Admin: React.FC = () => {
 
   useEffect(() => {
     api
-      .get(`/auth/getAll?page=${currentPage}&limit=${itemsPerPage}`)
+      .get(
+        `/auth/getAll?page=${currentPage}&limit=${itemsPerPage}&query=${query}`
+      )
       .then((res) => {
         setTotalItems(res.data.total);
         setItems(res.data.data);
@@ -54,10 +57,12 @@ export const Admin: React.FC = () => {
           window.location.href = "/login";
         }
       });
-  }, [currentPage]);
+  }, [currentPage, query]);
   const refreshPage = async () => {
     api
-      .get(`/auth/getAll?page=${currentPage}&limit=${itemsPerPage}`)
+      .get(
+        `/auth/getAll?page=${currentPage}&limit=${itemsPerPage}&query=${query}`
+      )
       .then((res) => {
         setTotalItems(res.data.total);
         setItems(res.data.data);
@@ -82,11 +87,9 @@ export const Admin: React.FC = () => {
     <div className="flex h-screen bg-[#FAFAFA]">
       <Sidebar />
       <div className="flex flex-col grow py-5 gap-[38px]">
-        <Header />
+        <Header query={query} setQuery={setQuery} />
         <div className="flex justify-between">
-          <p className="text-[24px] font-bold ms-[30px]">
-            IDP Loan Users
-          </p>
+          <p className="text-[24px] font-bold ms-[30px]">IDP Loan Users</p>
           <button
             onClick={() => {
               setShowModal(true);

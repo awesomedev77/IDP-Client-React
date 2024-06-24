@@ -1,16 +1,16 @@
 // src/components/Sidebar.tsx
 import React from "react";
-import logo from "../assets/images/logo.png";
-import { Accordion } from "./Accordion";
-import doc from "../assets/icons/doc.svg";
+import logo from "../../assets/images/logo.png";
+import { Accordion } from "../Accordion";
+import doc from "../../assets/icons/doc.svg";
 import { useDropzone } from "react-dropzone";
-import api from "../api/axios";
+import api from "../../api/axios";
 import {
   DocumentProps,
   Process,
   QueryGroup,
   QueryProps,
-} from "../utils/interface";
+} from "../../utils/interface";
 import { format, parseISO } from "date-fns";
 import { useNavigate } from "react-router-dom";
 
@@ -30,7 +30,7 @@ interface Document {
   status: string;
 }
 
-const DetailSidebar: React.FC<ApplicationInterface> = ({
+const DetailsSidebar: React.FC<ApplicationInterface> = ({
   document,
   process,
   setDocument,
@@ -40,51 +40,51 @@ const DetailSidebar: React.FC<ApplicationInterface> = ({
   setQuery,
 }) => {
   const navigate = useNavigate();
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: {
-      "text/plain": [".txt"], // Accepts .txt files
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-        [], // Accepts .docx files
-      "application/pdf": [], // Accepts .pdf files
-    },
-    multiple: false,
-    onDrop: async (acceptedFiles) => {
-      if (acceptedFiles.length > 0) {
-        let tempDocument: Document = {
-          id: -1,
-          path: "uploads\\1716972591915-" + acceptedFiles[0].name,
-          status: "A",
-        };
-        setDocument(tempDocument);
-        let tempDocuments = [tempDocument, ...process.documents];
-        setProcess({
-          ...process,
-          documents: [tempDocument, ...process.documents],
-        });
-        const formData = new FormData();
-        acceptedFiles.forEach((file) => formData.append("documents", file));
-        try {
-          const response = await api.post(`/report/${process.id}`, formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          });
-          const result: Document[] = response.data as Document[];
-          setDocument(result[0]);
-          setProcess({
-            ...process,
-            documnets: tempDocuments.map((item: any) => {
-              if (item.id !== -1) return item;
-              return result[0];
-            }),
-          });
-        } catch (error) {
-          console.log(error);
-          console.error("Failed to create application", error);
-        }
-      }
-    },
-  });
+  //   const { getRootProps, getInputProps } = useDropzone({
+  //     accept: {
+  //       "text/plain": [".txt"], // Accepts .txt files
+  //       "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+  //         [], // Accepts .docx files
+  //       "application/pdf": [], // Accepts .pdf files
+  //     },
+  //     multiple: false,
+  //     onDrop: async (acceptedFiles) => {
+  //       if (acceptedFiles.length > 0) {
+  //         let tempDocument: Document = {
+  //           id: -1,
+  //           path: "uploads\\1716972591915-" + acceptedFiles[0].name,
+  //           status: "A",
+  //         };
+  //         setDocument(tempDocument);
+  //         let tempDocuments = [tempDocument, ...process.documents];
+  //         setProcess({
+  //           ...process,
+  //           documents: [tempDocument, ...process.documents],
+  //         });
+  //         const formData = new FormData();
+  //         acceptedFiles.forEach((file) => formData.append("documents", file));
+  //         try {
+  //           const response = await api.post(`/report/${process.id}`, formData, {
+  //             headers: {
+  //               "Content-Type": "multipart/form-data",
+  //             },
+  //           });
+  //           const result: Document[] = response.data as Document[];
+  //           setDocument(result[0]);
+  //           setProcess({
+  //             ...process,
+  //             documnets: tempDocuments.map((item: any) => {
+  //               if (item.id !== -1) return item;
+  //               return result[0];
+  //             }),
+  //           });
+  //         } catch (error) {
+  //           console.log(error);
+  //           console.error("Failed to create application", error);
+  //         }
+  //       }
+  //     },
+  //   });
   const extractFileName = (path: string): string => {
     // Split the path by the '\' to isolate the file part
     const parts = path.split("\\");
@@ -116,10 +116,10 @@ const DetailSidebar: React.FC<ApplicationInterface> = ({
 
       <section>
         <div
-          {...getRootProps()}
+          //   {...getRootProps()}
           className="border-dashed border-[#575859] border-[1px] rounded-lg py-7 bg-[#222325] hover:cursor-pointer"
         >
-          <input {...getInputProps()} />
+          {/* <input {...getInputProps()} /> */}
           <p className="text-white text-[16px] font-semibold text-center">
             + New Document
           </p>
@@ -310,4 +310,4 @@ const DetailSidebar: React.FC<ApplicationInterface> = ({
   );
 };
 
-export default DetailSidebar;
+export default DetailsSidebar;

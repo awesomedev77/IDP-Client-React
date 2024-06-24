@@ -21,6 +21,8 @@
 
 .select-search-select {
     width: 250px;
+    max-height: 250px;
+    overflow-y: auto;
     top: 35px!important;
     border: 2px solid darkgrey!important;
 }

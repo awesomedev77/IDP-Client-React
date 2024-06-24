@@ -2,10 +2,12 @@ import React, { useState } from "react";
 
 import loan from "../assets/images/loan.png";
 import calendar from "../assets/images/calendar.png";
+import documentType from "../assets/images/type.png";
+import processImage from "../assets/images/process.png";
+import documentImage from "../assets/images/document.png";
 import { useNavigate } from "react-router-dom";
 import { format, parseISO } from "date-fns";
 import { DocumentProps } from "../utils/interface";
-import { useAuthStore } from "../store/authStore";
 import { extractFileName } from "../utils/Operations";
 interface ItemProps {
   item: DocumentProps;
@@ -20,15 +22,15 @@ const Item: React.FC<ItemProps> = ({ item }) => {
         <div className="flex flex-row gap-[18px]">
           <img
             alt="itemimage"
-            src={`https://ui-avatars.com/api/?length=3&rounded=false&bold=true&name=IDP`}
-            className="w-[68px] h-[68px] my-auto"
+            src={documentImage}
+            className="w-12 h-12 my-auto"
           />
-          <div className="flex flex-col gap-1 my-auto">
-            <p className="text-[18px] font-semibold leading-normal ">
-              {extractFileName(item.path)}
+          <div className="flex flex-col my-auto justify-center">
+            <p className="text-[18px] font-semibold leading-normal text-[#656F93] ">
+              Document Name
             </p>
-            <p className="text-[16px] font-semibold leading-normal text-[#656F93]">
-              {item.documentType.typeName}
+            <p className="text-[16px] font-semibold leading-normal">
+              {extractFileName(item.path)}
             </p>
           </div>
         </div>
@@ -64,49 +66,45 @@ const Item: React.FC<ItemProps> = ({ item }) => {
       <div className="flex flex-col gap-7 pt-[-4px]">
         <div className="grid grid-cols-2 gap-3">
           <div className="flex flex-row gap-3">
-            <img alt="itemimage" src={loan} className="w-12 h-12 my-auto" />
+            <img
+              alt="itemimage"
+              src={processImage}
+              className="w-12 h-12 my-auto"
+            />
             <div className="flex flex-col gap-1 my-auto">
               <p className="text-[14px] font-semibold text-[#656F93] leading-normal">
-                {item.process.processName}
+                Process Type
               </p>
               <p className="text-[16px] font-semibold text-[#161719] leading-normal overflow-hidden line-clamp-1 break-all">
-                {item.process.processDescription}
+                {item.process.processName}
               </p>
             </div>
           </div>
           <div className="flex flex-row gap-3">
-            <img alt="itemimage" src={calendar} className="w-12 h-12 my-auto" />
+            <img
+              alt="itemimage"
+              src={documentType}
+              className="w-12 h-12 my-auto"
+            />
             <div className="flex flex-col gap-1 my-auto">
               <p className="text-[14px] font-semibold text-[#656F93] leading-normal">
-                Date and Time
+                Document Type
               </p>
-              <p className="text-[16px] font-semibold text-[#161719] leading-normal">
-                {format(parseISO(item.createdAt), "dd MMM, yyyy, hh:mm aaa")}
+              <p className="text-[16px] font-semibold text-[#161719] leading-normal overflow-hidden line-clamp-1 break-all">
+                {item.documentType?.typeName}
               </p>
             </div>
           </div>
         </div>
         <div className="flex flex-row gap-3">
-          <img
-            alt="itemimage"
-            src={`https://ui-avatars.com/api/?length=2&rounded=true&bold=true&name=${item.creator.fullName}`}
-            className="w-12 h-12"
-          />
+          <img alt="itemimage" src={calendar} className="w-12 h-12 my-auto" />
           <div className="flex flex-col gap-1 my-auto">
             <p className="text-[14px] font-semibold text-[#656F93] leading-normal">
-              Applied By
+              Date and Time
             </p>
-            <div className="flex flex-row gap-2">
-              <p className="text-[16px] font-semibold text-[#161719] leading-normal">
-                {item.creator.role}
-              </p>
-              <p className="text-[16px] font-semibold text-[#161719] leading-normal">
-                |
-              </p>
-              <p className="text-[16px] font-semibold text-[#161719] leading-normal">
-                {item.creator.fullName}
-              </p>
-            </div>
+            <p className="text-[16px] font-semibold text-[#161719] leading-normal">
+              {format(parseISO(item.createdAt), "dd MMM, yyyy, hh:mm aaa")}
+            </p>
           </div>
         </div>
       </div>

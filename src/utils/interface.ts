@@ -74,7 +74,7 @@ export type MessageProps = {
 export type QueryProps = {
   id: string;
   user: User;
-  applicationId: string;
+  processId: string;
   messages: MessageProps[];
 }
 

@@ -19,7 +19,7 @@ import { useAuthStore } from "../store/authStore";
 import Chat from "../components/Chat";
 import DetailsSidebar from "../components/Details/DetailsSidebar";
 
-export const Detail = () => {
+export const Details = () => {
   const { isAuthenticated, user } = useAuthStore();
   const [process, setProcess] = useState<Process>();
   const [queries, setQueries] = useState<QueryGroup>();

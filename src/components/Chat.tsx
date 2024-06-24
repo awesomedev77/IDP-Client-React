@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  ApplicationProps,
   MessageProps,
+  Process,
   QueryGroup,
   QueryProps,
 } from "../utils/interface";
@@ -15,7 +15,7 @@ import { Input } from "react-chat-elements";
 import api from "../api/axios";
 
 type ChatProps = {
-  application?: ApplicationProps;
+  process?: Process;
   query?: QueryProps;
   setQuery: any;
   queries?: QueryGroup;
@@ -25,7 +25,7 @@ type ChatProps = {
 };
 
 const Chat: React.FC<ChatProps> = ({
-  application,
+  process,
   query,
   setQuery,
   myQuery,
@@ -136,7 +136,7 @@ const Chat: React.FC<ChatProps> = ({
       } else {
         if (ref.current) ref.current.value = "";
         const response = await api.post("/query", {
-          applicationId: application?.id,
+          processId: process?.id,
           prompt,
         });
         setQuery(response.data);
@@ -156,24 +156,24 @@ const Chat: React.FC<ChatProps> = ({
       <div className=" flex flex-col gap-7">
         <div className="flex flex-row justify-between">
           <div className="flex flex-row gap-3">
-            <img
+            {/* <img
               alt="itemimage"
               src={`https://ui-avatars.com/api/?length=2&rounded=true&bold=true&name=${application?.applicantName}`}
               className="w-12 h-12"
-            />
+            /> */}
             <div className="flex flex-col gap-1 my-auto">
               <p className="text-[14px] font-semibold text-[#656F93] leading-normal">
-                Applied By
+                Process By
               </p>
               <div className="flex flex-row gap-2">
                 <p className="text-[16px] font-semibold text-[#161719] leading-normal">
-                  {application?.applicantName}
+                  {process?.creator?.fullName}
                 </p>
                 <p className="text-[16px] font-semibold text-[#161719] leading-normal">
                   |
                 </p>
                 <p className="text-[16px] font-semibold text-[#161719] leading-normal">
-                  {application?.applicantDescription}
+                  {process?.creator?.role}
                 </p>
               </div>
             </div>
@@ -182,14 +182,14 @@ const Chat: React.FC<ChatProps> = ({
             <img alt="itemimage" src={loan} className="w-12 h-12 my-auto" />
             <div className="flex flex-col gap-1 my-auto">
               <p className="text-[14px] font-semibold text-[#656F93] leading-normal">
-                Loan Amount
+                Total Documents Processed
               </p>
-              <p className="text-[16px] font-semibold text-[#161719] leading-normal">
+              {/* <p className="text-[16px] font-semibold text-[#161719] leading-normal">
                 {application?.currency}{" "}
                 {new Intl.NumberFormat("en-US").format(
                   application?.loanAmount || 0
                 )}
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

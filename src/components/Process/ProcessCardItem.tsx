@@ -4,6 +4,7 @@ import calendar from "../../assets/images/calendar.png";
 import { useNavigate } from "react-router-dom";
 import { format, parseISO } from "date-fns";
 import { Process } from "../../utils/interface";
+import processImage from "../../assets/images/process.png";
 interface ItemProps {
   item: Process;
 }
@@ -15,17 +16,13 @@ const ProcessCardItem: React.FC<ItemProps> = ({ item }) => {
   return (
     <div className="bg-white shadow-md rounded-xl p-[18px] flex flex-col gap-6">
       <div className="flex flex-row gap-[18px]">
-        <img
-          alt="itemimage"
-          src={`https://ui-avatars.com/api/?length=3&rounded=false&bold=true&name=IDP`}
-          className="w-[68px] h-[68px] my-auto"
-        />
+        <img alt="itemimage" src={processImage} className="w-12 h-12 my-auto" />
         <div className="flex flex-grow overflow-hidden flex-col gap-1 my-auto">
           <p className="text-[18px] font-semibold leading-normal ">
-            {item.processName}
+            Process Name
           </p>
           <p className="text-[16px] font-semibold leading-normal truncate text-[#656F93]">
-            {item.processDescription}
+            {item.processName}
           </p>
         </div>
         <div
@@ -82,41 +79,35 @@ const ProcessCardItem: React.FC<ItemProps> = ({ item }) => {
         <div className="flex flex-row gap-3">
           <img
             alt="itemimage"
-            src={`https://ui-avatars.com/api/?length=2&rounded=true&bold=true&name=${item.creator.fullName}`}
-            className="w-12 h-12"
+            src={processImage}
+            className="w-12 h-12 my-auto"
           />
-          <div className="flex flex-col gap-1 my-auto">
+          <div className="flex flex-col gap-1 overflow-hidden my-auto">
             <p className="text-[14px] font-semibold text-[#656F93] leading-normal">
-              Created By
+              Process Description
             </p>
             <div className="flex flex-row gap-2">
-              <p className="text-[16px] font-semibold text-[#161719] leading-normal">
-                {item.creator.role}
-              </p>
-              <p className="text-[16px] font-semibold text-[#161719] leading-normal">
-                |
-              </p>
-              <p className="text-[16px] font-semibold text-[#161719] leading-normal">
-                {item.creator.fullName}
+              <p className="text-[16px] font-semibold leading-normal truncate text-[#656F93]">
+                {item.processDescription}
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-2 gap-3">
         <button
           disabled={item.documents.length === 0}
           className="bg-blue-500 flex-grow disabled:bg-gray-400 text-white py-[16px] rounded-full text-[18px] font-bold leading-[13px]"
-          onClick={() => navigate(`/detail/${item.id}`)}
+          onClick={() => navigate(`/?process=${item.id}`)}
         >
-          View All
+          View Documents
         </button>
         <button
           disabled={item.documents.length === 0}
           className="bg-blue-500 flex-grow disabled:bg-gray-400 text-white py-[16px] rounded-full text-[18px] font-bold leading-[13px]"
-          onClick={() => navigate(`/detail/${item.id}`)}
+          onClick={() => navigate(`/details/${item.id}`)}
         >
-          Interact
+          Interact With Documents
         </button>
       </div>
     </div>
