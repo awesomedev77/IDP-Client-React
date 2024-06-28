@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import close_circle from "../assets/icons/close-circle.svg";
 import { UploadIcon } from "../components/icons/upload";
 import api from "../api/axios";
@@ -7,6 +7,7 @@ import "react-select-search/style.css";
 import "../Select.css";
 import DocumentList from "./DocumentList";
 import { isNotEmpty } from "../utils/validators";
+import { useDropzone } from "react-dropzone";
 
 type ModalFormProps = {
   show: boolean;
@@ -22,6 +23,20 @@ const ModalForm: React.FC<ModalFormProps> = ({ show, onClose }) => {
   const [process, setProcess] = useState("");
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState<ExtendedFile[]>([]);
+
+  const onDrop = useCallback((acceptedFiles: Array<File>) => {
+    if (typeof acceptedFiles[0] === "undefined") return;
+    if (acceptedFiles && acceptedFiles.length > 0) {
+      const newFiles = Array.from(acceptedFiles).map((file: File) => ({
+        file,
+        documentType: [],
+      }));
+      setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+    }
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
   useEffect(() => {
     api
       .get("/type/getAll")
@@ -158,8 +173,12 @@ const ModalForm: React.FC<ModalFormProps> = ({ show, onClose }) => {
             onClick={onClose}
           />
         </div>
-        <label htmlFor="file_input">
-          <div className="flex flex-col items-center cursor-pointer justify-center border border-dashed border-gray-400 m-7 p-7 rounded-xl ">
+        <label {...getRootProps()}>
+          <div
+            className={`${
+              isDragActive && "bg-gray-200"
+            } flex flex-col items-center cursor-pointer justify-center border border-dashed border-gray-400 m-7 p-7 rounded-xl`}
+          >
             <UploadIcon className="stroke-2 stroke-black w-[25px] h-[35px]" />
             <span className="text-[23px] font-semibold">
               Click or drag all the files to this area to upload
@@ -170,7 +189,8 @@ const ModalForm: React.FC<ModalFormProps> = ({ show, onClose }) => {
           </div>
         </label>
         <input
-          onChange={handleFileChange}
+          {...getInputProps()}
+          //onChange={handleFileChange}
           className="hidden"
           aria-describedby="file_input_help"
           id="file_input"

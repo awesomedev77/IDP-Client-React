@@ -91,7 +91,7 @@ export const SearchSelectButton: React.FC<props> = ({
           ) : (
             <div
               key={option.value}
-              className="border border-blue-200 rounded-2xl cursor-pointer px-3 text-blue-400 bg-blue-600 text-white"
+              className="border border-blue-200 rounded-2xl cursor-pointer px-3 hover:bg-blue-500 bg-blue-600 text-white"
               onClick={() => onOptionBadgeClick(option)}
             >
               #{option.name}
