@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import logo from "../assets/images/logo.png";
+import close_circle from "../assets/icons/close-circle.svg";
+import { UploadIcon } from "../components/icons/upload";
 import api from "../api/axios";
 import { Process, Type } from "../utils/interface";
 import SelectSearch from "react-select-search";
 import "react-select-search/style.css";
 import "../Select.css";
+import DocumentList from "./DocumentList";
 
 type ModalFormProps = {
   show: boolean;
@@ -83,7 +85,7 @@ const ModalForm: React.FC<ModalFormProps> = ({ show, onClose }) => {
       valid = false;
     }
     files.forEach((file) => {
-      if (file.documentType == "") {
+      if (file.documentType === "") {
         valid = false;
         setError("Please select document type");
         return;
@@ -142,19 +144,46 @@ const ModalForm: React.FC<ModalFormProps> = ({ show, onClose }) => {
         className="fixed left-0 top-0 w-screen h-screen bg-transparent"
         onClick={onClose}
       ></div>
-      <div className="relative my-auto mx-auto p-5 border w-[600px] shadow-lg rounded-[14px] bg-white">
-        <div className="mb-10 mt-5 flex justify-evenly items-center">
-          <div className="">
-            <img alt="" className="h-14 w-14" src={logo} />
-          </div>
-          <h2 className="text-center text-3xl font-extrabold text-gray-900">
-            Upload Documents
+      <div className="relative my-auto mx-auto pb-7 min-h-[550px] w-[900px] shadow-lg rounded-[14px] bg-white">
+        <div className="flex items-center px-5 bg-black rounded-tr-[14px] h-[60px] rounded-tl-[14px] justify-between">
+          <h2 className="text-2xl font-semibold text-white">
+            Upload Document(s)
           </h2>
+          <img
+            src={close_circle}
+            className="h-8 w-8 cursor-pointer"
+            alt="close"
+            onClick={onClose}
+          />
         </div>
-        {error && error !== "" && (
-          <div className="text-center text-red-500 text-bold">{error}</div>
-        )}
-        <form
+        <label htmlFor="file_input">
+          <div className="flex flex-col items-center cursor-pointer justify-center border border-dashed border-gray-400 m-7 p-7 rounded-xl ">
+            <UploadIcon className="stroke-2 stroke-black w-[30px] h-[40px]" />
+            <span className="text-[25px] font-semibold">
+              Click or drag all the files to this area to upload
+            </span>
+            <span className="text-[17px] text-gray-500">
+              Upload each document as a seperate file in PDF, JPG, PNG format.
+            </span>
+          </div>
+        </label>
+        <input
+          onChange={handleFileChange}
+          className="hidden"
+          aria-describedby="file_input_help"
+          id="file_input"
+          accept=".pdf, .docs, .txt"
+          type="file"
+        />
+        <div className="max-h-[300px] overflow-auto mb-[50px]">
+          <DocumentList files={files} typeOptions={typeOptions} />
+        </div>
+        <div className="flex justify-center bottom-5 w-full absolute">
+          <button className="rounded-3xl bg-blue-500 w-[120px] h-[40px] text-white">
+            Upload
+          </button>
+        </div>
+        {/* <form
           className="px-8 py-2 max-h-[78vh] overflow-auto"
           onSubmit={handleSubmit}
         >
@@ -235,7 +264,7 @@ const ModalForm: React.FC<ModalFormProps> = ({ show, onClose }) => {
               Create
             </button>
           </div>
-        </form>
+        </form> */}
       </div>
     </div>
   );
