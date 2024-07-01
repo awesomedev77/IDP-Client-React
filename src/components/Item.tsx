@@ -91,7 +91,7 @@ const Item: React.FC<ItemProps> = ({ item }) => {
                 Document Type
               </p>
               <p className="text-[16px] font-semibold text-[#161719] leading-normal overflow-hidden line-clamp-1 break-all">
-                {item.documentType?.typeName}
+                {item.documentTypes[0]?.type?.typeName}
               </p>
             </div>
           </div>

@@ -50,7 +50,7 @@ export const SelectButton: React.FC<props> = ({
                   onClick={(e) => {
                     setProcess(option.name);
                     setShowOptions(false);
-                    onHandleOptionChange(option.name);
+                    onHandleOptionChange(option.value);
                     document.removeEventListener(
                       "mousedown",
                       handleClickOutside

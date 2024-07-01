@@ -40,6 +40,11 @@ export type Process = {
   documents: DocumentProps[];
 }
 
+export type DocumentType = {
+  document: DocumentProps;
+  type: Type;
+}
+
 export type DocumentProps = {
   id: string;
   path: string;
@@ -47,7 +52,7 @@ export type DocumentProps = {
   process: Process;
   createdAt: string;
   creator: User;
-  documentType: Type;
+  documentTypes: DocumentType[];
 }
 
 export type ReportProps = {

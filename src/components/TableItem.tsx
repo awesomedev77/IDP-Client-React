@@ -22,7 +22,7 @@ export const TableItem: React.FC<Props> = ({ no, document }) => {
         {document.process.processName}
       </td>
       <td className=" px-6 py-4 font-[15px] text-[#161719] whitespace-nowrap dark:text-white">
-        <span>{document.documentType?.typeName}</span>
+        <span>{document.documentTypes[0]?.type?.typeName}</span>
       </td>
       <td className="px-6 py-4 font-[15px] text-[#161719] whitespace-nowrap dark:text-white">
         <div

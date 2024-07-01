@@ -130,7 +130,7 @@ const Home: React.FC = () => {
             Intelligence Document Processing
           </p>
           <div className="flex-grow"></div>
-          {/* <SelectSearch
+          <SelectSearch
             placeholder="Filter Type"
             emptyMessage="empty"
             search
@@ -149,7 +149,7 @@ const Home: React.FC = () => {
               options={processOptions}
               className="select-search"
             />
-          </div> */}
+          </div>
           <button
             className={`${
               viewMode !== "card" ? "text-gray-600" : "text-blue-500"

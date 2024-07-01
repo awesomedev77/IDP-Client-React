@@ -93,6 +93,7 @@ const ModalForm: React.FC<ModalFormProps> = ({ show, onClose }) => {
   };
 
   const handleOptionChange = (selectedOption: string) => {
+    console.log(selectedOption);
     setProcess(selectedOption);
   };
 
@@ -123,9 +124,9 @@ const ModalForm: React.FC<ModalFormProps> = ({ show, onClose }) => {
     formData.append("processId", process);
     files.forEach((file) => {
       formData.append("documents", file.file);
-      formData.append("fileTypes", file.documentType?.join(",") || ""); // Append document type
+      formData.append("fileTypes", file.documentType?.join("-") || ""); // Append document type
     });
-
+    console.log(formData);
     try {
       const response = await api.post("/document/create", formData, {
         headers: {
