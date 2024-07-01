@@ -13,6 +13,7 @@ import { CompactIcon } from "../components/icons/compact";
 import { SheetsIcon } from "../components/icons/sheets";
 import { Process, Type } from "../utils/interface";
 import SelectSearch from "react-select-search";
+import uploadIcon from "../assets/icons/upload.svg";
 
 const Home: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -171,9 +172,14 @@ const Home: React.FC = () => {
               onClick={() => {
                 setShowModal(true);
               }}
-              className="me-[36px] bg-blue-500 text-white py-[10px] px-[20px] rounded-full text-[18px] font-bold leading-[13px]"
+              className="me-[36px] flex items-center text-blue-500 border-2 border-blue-500 py-[10px] px-[20px] rounded-full text-[18px] font-bold leading-[13px]"
             >
-              Create
+              <img
+                src={uploadIcon}
+                alt="upload"
+                className="w-[20px] h-[20px] me-[10px]"
+              />
+              Upload Document
             </button>
           )}
         </div>
