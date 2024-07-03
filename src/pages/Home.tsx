@@ -31,10 +31,54 @@ const Home: React.FC = () => {
     (searchParams.get("process") as string) || ""
   );
   const [typeFilter, setTypeFilter] = useState("");
+  const [sortBy, setSortBy] = useState("createdAt");
+  const [sort, setSort] = useState("DESC");
+  
   const itemsPerPage = 9;
   const handleClose = () => {
     setShowModal(false);
   };
+  const styles: any = {
+    arrowContainer: {
+      display: "inline-flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      marginLeft: "10px",
+    },
+
+    upArrow: {
+      borderBottom: "5px solid rgb(65 130 235 / var(--tw-text-opacity))",
+      width: "0",
+      height: "0",
+      borderLeft: "5px solid transparent",
+      borderRight: "5px solid transparent",
+    },
+    downArrow: {
+      borderTop: "5px solid grey",
+      width: "0",
+      height: "0",
+      borderLeft: "5px solid transparent",
+      borderRight: "5px solid transparent",
+      marginTop: "5px",
+    },
+    upArrowNo: {
+      borderBottom: "5px solid grey",
+      width: "0",
+      height: "0",
+      borderLeft: "5px solid transparent",
+      borderRight: "5px solid transparent",
+    },
+    downArrowYes: {
+      borderTop: "5px solid rgb(65 130 235 / var(--tw-text-opacity))",
+      width: "0",
+      height: "0",
+      borderLeft: "5px solid transparent",
+      borderRight: "5px solid transparent",
+      marginTop: "5px",
+    },
+  };
+
   useEffect(() => {
     api
       .get("/type/getAll")
@@ -67,7 +111,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     api
       .get(
-        `/document/get?page=1&limit=9&query=${query}&processFilter=${processFilter}&typeFilter=${typeFilter}`
+        `/document/get?page=1&limit=9&sortBy=createdAt&sort=DESC&query=${query}&processFilter=${processFilter}&typeFilter=${typeFilter}`
       )
       .then((res) => {
         setTotalItems(res.data.total);
@@ -86,13 +130,13 @@ const Home: React.FC = () => {
     console.log(processFilter);
     api
       .get(
-        `/document/get?page=${currentPage}&limit=${itemsPerPage}&query=${query}&processFilter=${processFilter}&typeFilter=${typeFilter}`
+        `/document/get?page=${currentPage}&limit=${itemsPerPage}&sortBy=${sortBy}&sort=${sort}&query=${query}&processFilter=${processFilter}&typeFilter=${typeFilter}`
       )
       .then((res) => {
         setTotalItems(res.data.total);
         setItems(res.data.data);
       });
-  }, [currentPage, typeFilter, processFilter, query]);
+  }, [currentPage, typeFilter, processFilter, query,sortBy, sort]);
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -119,6 +163,11 @@ const Home: React.FC = () => {
       navigate("/login");
     }
   }, [isAuthenticated, navigate]);
+
+  const handleSortClick = (direction: string, orderBy: string) => {
+    setSortBy(orderBy);
+    setSort(direction);
+  };
 
   return (
     <div className="flex h-screen bg-[#FAFAFA]">
@@ -200,6 +249,25 @@ const Home: React.FC = () => {
                       </th>
                       <th scope="col" className="px-6 py-3">
                         File Name
+                        {sort == "ASC" && sortBy=="fileName" ? <div style={styles.arrowContainer}>
+                          <span
+                            style={styles.upArrow}
+                            onClick={() => handleSortClick("ASC", "fileName")}
+                          ></span>
+                          <span
+                            style={styles.downArrow}
+                            onClick={() => handleSortClick("DESC", "fileName")}
+                          ></span>
+                        </div>:<div style={styles.arrowContainer}>
+                          <span
+                            style={styles.upArrowNo}
+                            onClick={() => handleSortClick("ASC", "fileName")}
+                          ></span>
+                          <span
+                            style={styles.downArrowYes}
+                            onClick={() => handleSortClick("DESC", "fileName")}
+                          ></span>
+                        </div>}
                       </th>
                       <th scope="col" className="px-6 py-3">
                         Process Type
@@ -212,6 +280,25 @@ const Home: React.FC = () => {
                       </th>
                       <th scope="col" className="px-6 py-3">
                         Created at
+                        {sort == "ASC" && sortBy=="createdAt" ? <div style={styles.arrowContainer}>
+                          <span
+                            style={styles.upArrow}
+                            onClick={() => handleSortClick("ASC", "createdAt")}
+                          ></span>
+                          <span
+                            style={styles.downArrow}
+                            onClick={() => handleSortClick("DESC", "createdAt")}
+                          ></span>
+                        </div>:<div style={styles.arrowContainer}>
+                          <span
+                            style={styles.upArrowNo}
+                            onClick={() => handleSortClick("ASC", "createdAt")}
+                          ></span>
+                          <span
+                            style={styles.downArrowYes}
+                            onClick={() => handleSortClick("DESC", "createdAt")}
+                          ></span>
+                        </div>}
                       </th>
                       <th scope="col" className="px-6 py-3">
                         <span>Actions</span>

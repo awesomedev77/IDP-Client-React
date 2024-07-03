@@ -9,12 +9,18 @@ import { useNavigate } from "react-router-dom";
 import { format, parseISO } from "date-fns";
 import { DocumentProps } from "../utils/interface";
 import { extractFileName } from "../utils/Operations";
+import ViewDocumentModal from "../components/ViewDocumentModal"
 interface ItemProps {
   item: DocumentProps;
 }
 
 const Item: React.FC<ItemProps> = ({ item }) => {
   const navigate = useNavigate();
+  const [viewDocumentModal, setViewDocumentModal] = useState(false);
+
+  const handleViewDocumentClose = () => {
+    setViewDocumentModal(false);
+  };
 
   return (
     <div className="bg-white shadow-md rounded-xl p-[18px] flex flex-col gap-6">
@@ -109,6 +115,13 @@ const Item: React.FC<ItemProps> = ({ item }) => {
         </div>
       </div>
       <div className="flex">
+      <button
+          className="bg-blue-500 flex-grow text-white py-[16px] rounded-full text-[18px] font-bold leading-[13px]"
+          onClick={() => {
+                setViewDocumentModal(true);}}
+        >
+          View Document
+        </button>
         <button
           className="bg-blue-500 flex-grow text-white py-[16px] rounded-full text-[18px] font-bold leading-[13px]"
           onClick={() => navigate(`/detail/${item.id}`)}
@@ -116,6 +129,7 @@ const Item: React.FC<ItemProps> = ({ item }) => {
           Interact With Application Document
         </button>
       </div>
+      <ViewDocumentModal key={Math.random()} show={viewDocumentModal} onClose={handleViewDocumentClose} />
     </div>
   );
 };
