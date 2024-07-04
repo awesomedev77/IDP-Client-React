@@ -12,16 +12,13 @@ import { extractFileName } from "../utils/Operations";
 import ViewDocumentModal from "../components/ViewDocumentModal"
 interface ItemProps {
   item: DocumentProps;
+  setViewDocumentModal: (val:boolean) => void;
+  setCurrentDoc: (doc: string) => void
 }
 
-const Item: React.FC<ItemProps> = ({ item }) => {
+const Item: React.FC<ItemProps> = ({ item, setViewDocumentModal, setCurrentDoc }) => {
   const navigate = useNavigate();
-  const [viewDocumentModal, setViewDocumentModal] = useState(false);
-
-  const handleViewDocumentClose = () => {
-    setViewDocumentModal(false);
-  };
-
+  console.log('item......', extractFileName(item.path))
   return (
     <div className="bg-white shadow-md rounded-xl p-[18px] flex flex-col gap-6">
       <div className="flex flex-row justify-between">
@@ -116,8 +113,9 @@ const Item: React.FC<ItemProps> = ({ item }) => {
       </div>
       <div className="flex">
       <button
-          className="bg-blue-500 flex-grow text-white py-[16px] rounded-full text-[18px] font-bold leading-[13px]"
+          className="bg-blue-500 mr-3 flex-grow text-white py-[16px] rounded-full text-[18px] font-bold leading-[13px]"
           onClick={() => {
+                setCurrentDoc(item.path);
                 setViewDocumentModal(true);}}
         >
           View Document
@@ -129,7 +127,6 @@ const Item: React.FC<ItemProps> = ({ item }) => {
           Interact With Application Document
         </button>
       </div>
-      <ViewDocumentModal key={Math.random()} show={viewDocumentModal} onClose={handleViewDocumentClose} />
     </div>
   );
 };

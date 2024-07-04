@@ -28,11 +28,13 @@ export const DocumentProcess: React.FC = () => {
 
   const styles: any = {
     arrowContainer: {
+      position:"absolute",
       display: "inline-flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
       marginLeft: "10px",
+      marginTop: "2px"
     },
 
     upArrow: {

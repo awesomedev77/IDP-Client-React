@@ -3,13 +3,16 @@ import { format, parseISO } from "date-fns";
 import { DocumentProps } from "../utils/interface";
 import { extractFileName } from "../utils/Operations";
 import interactIcon from "../assets/images/interacticon.png";
+import viewIcon from "../assets/images/viewicon.png"
 
 type Props = {
   no: number;
   document: DocumentProps;
+  setViewDocumentModal: (val: boolean) => void;
+  setCurrentDoc: (doc: string) => void
 };
 
-export const TableItem: React.FC<Props> = ({ no, document }) => {
+export const TableItem: React.FC<Props> = ({ no, document, setViewDocumentModal, setCurrentDoc }) => {
   return (
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
       <td className="px-6 py-4">{no}</td>
@@ -56,12 +59,21 @@ export const TableItem: React.FC<Props> = ({ no, document }) => {
       <td className="px-6 py-4 font-[15px] text-[#161719] whitespace-nowrap dark:text-white">
         {format(parseISO(document.createdAt), "dd MMM, yyyy, hh:mm aaa")}
       </td>
-      <td className="px-6 py-4 text-right">
+      <td className="px-6 py-4 text-right flex flex-row">
+        <span
+          onClick={() => {
+            setCurrentDoc((document.path));
+            setViewDocumentModal(true);
+          }}
+          className="mr-3 cursor-pointer"
+        >
+          <img alt="itemimage" src={viewIcon} className="w-9 h-9 my-auto" />
+        </span>
         <span
           onClick={() => {
             alert("Interact");
           }}
-          className=""
+          className="cursor-pointer"
         >
           <img alt="itemimage" src={interactIcon} className="w-9 h-9 my-auto" />
         </span>

@@ -14,6 +14,7 @@ import { SheetsIcon } from "../components/icons/sheets";
 import { Process, Type } from "../utils/interface";
 import SelectSearch from "react-select-search";
 import uploadIcon from "../assets/icons/upload.svg";
+import ViewDocumentModal from "../components/ViewDocumentModal";
 
 const Home: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -40,11 +41,13 @@ const Home: React.FC = () => {
   };
   const styles: any = {
     arrowContainer: {
+      position:"absolute",
       display: "inline-flex",
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
       marginLeft: "10px",
+      marginTop: "2px"
     },
 
     upArrow: {
@@ -167,6 +170,12 @@ const Home: React.FC = () => {
   const handleSortClick = (direction: string, orderBy: string) => {
     setSortBy(orderBy);
     setSort(direction);
+  };
+  const [viewDocumentModal, setViewDocumentModal] = useState(false);
+  const [currentDoc, setCurrentDoc] = useState<string>('');
+
+  const handleViewDocumentClose = () => {
+    setViewDocumentModal(false);
   };
 
   return (
@@ -308,6 +317,8 @@ const Home: React.FC = () => {
                   <tbody>
                     {items.map((item, index) => (
                       <TableItem
+                        setViewDocumentModal={setViewDocumentModal}
+                        setCurrentDoc={setCurrentDoc}
                         no={index + 1}
                         key={`useritem-${item.id}`}
                         document={item}
@@ -320,7 +331,7 @@ const Home: React.FC = () => {
           ) : (
             <div className="grid grid-cols-3 gap-4">
               {items.map((item) => (
-                <Item key={`loanitem-${item.id}`} item={item} />
+                <Item key={`loanitem-${item.id}`} item={item} setViewDocumentModal={setViewDocumentModal} setCurrentDoc={setCurrentDoc} />
               ))}
             </div>
           )}
@@ -332,6 +343,7 @@ const Home: React.FC = () => {
         </div>
       </div>
       <ModalForm key={Math.random()} show={showModal} onClose={handleClose} />
+      <ViewDocumentModal key={Math.random()} show={viewDocumentModal} onClose={handleViewDocumentClose} currentDoc={currentDoc} />
     </div>
   );
 };
