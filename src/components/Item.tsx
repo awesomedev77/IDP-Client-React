@@ -18,7 +18,6 @@ interface ItemProps {
 
 const Item: React.FC<ItemProps> = ({ item, setViewDocumentModal, setCurrentDoc }) => {
   const navigate = useNavigate();
-  console.log('item......', extractFileName(item.path))
   return (
     <div className="bg-white shadow-md rounded-xl p-[18px] flex flex-col gap-6">
       <div className="flex flex-row justify-between">
