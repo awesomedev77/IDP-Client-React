@@ -3,6 +3,7 @@ import { format, parseISO } from "date-fns";
 import { DocumentProps } from "../utils/interface";
 import { extractFileName } from "../utils/Operations";
 import interactIcon from "../assets/images/interacticon.png";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   no: number;
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export const TableItem: React.FC<Props> = ({ no, document }) => {
+  const navigate = useNavigate();
   return (
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
       <td className="px-6 py-4">{no}</td>
@@ -57,14 +59,9 @@ export const TableItem: React.FC<Props> = ({ no, document }) => {
         {format(parseISO(document.createdAt), "dd MMM, yyyy, hh:mm aaa")}
       </td>
       <td className="px-6 py-4 text-right">
-        <span
-          onClick={() => {
-            alert("Interact");
-          }}
-          className=""
-        >
-          <img alt="itemimage" src={interactIcon} className="w-9 h-9 my-auto" />
-        </span>
+          <img onClick={() => {
+              navigate(`/details/${document.process.id}`);
+            }} alt="itemimage" src={interactIcon} className="w-9 h-9 my-auto" />
       </td>
       {/* <EditProcessModal
         process={process}

@@ -18,6 +18,7 @@ import {
 import { useAuthStore } from "../store/authStore";
 import Chat from "../components/Chat";
 import DetailsSidebar from "../components/Details/DetailsSidebar";
+import { SourceAccordion } from "../components/SourceAccordion";
 
 export const Detail = () => {
   const { isAuthenticated, user } = useAuthStore();
@@ -160,18 +161,16 @@ export const Detail = () => {
         />
         {process?.documents && process?.documents.length > 0 ? (
           document?.status === "Y" ? (
-            <div className="flex flex-col gap-[8px]">
-              <div className="p-[30px]  flex flex-col gap-[30px] h-full overflow-auto">
-                <div className="h-full flex flex-col bg-[#fff] border-[1px] rounded-xl border-[#ECECEC] card-shadow">
-                  <div className="flex flex-row gap-3 p-5">
-                    <p className="text-[22px] text-black font-bold">
-                      Sources
-                    </p>
+            <div className="flex flex-col gap-[8px] h-screen">
+              <div className="flex flex-1 justify-end">
+                <div className="p-[30px] flex flex-col gap-[30px] h-full w-[630px] overflow-y-auto">
+                  <div className="h-full flex flex-col bg-[#fff] border-[1px] rounded-xl border-[#ECECEC] card-shadow">
+                    <div className="flex flex-row gap-3 p-5">
+                      <p className="text-[22px] text-black font-bold">Sources</p>
+                    </div>
+                    <hr className="border-[#ececec]" />
+                    <SourceAccordion />
                   </div>
-                  <hr className="border-[#ececec]" />
-                  <p className="p-5 text-black text-[16px] leading-[26px]">
-                    {item?.companyDescription || "No provided"}
-                  </p>
                 </div>
               </div>
             </div>
