@@ -166,14 +166,14 @@ export const SourceAccordion: React.FC = () => {
                 <div className="flex flex-col">
                   <div
                     className="px-1 py-4 flex flex-row justify-between cursor-pointer"
-                    onClick={() => toggleNested("nested2")}
+                    onClick={() => toggleNested("nested1")}
                   >
                     <p>
                       <span className="text-gray-500">1.Source : </span>
                       <span>BCE-EG-006.dox</span>
                     </p>
                     <svg
-                      className={`w-3 h-3 transform ${openSection.nested === "nested2" ? "" : "rotate-180"}`}
+                      className={`w-3 h-3 transform ${openSection.nested === "nested1" ? "" : "rotate-180"}`}
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -189,8 +189,8 @@ export const SourceAccordion: React.FC = () => {
                     </svg>
                   </div>
                   <hr className="border-gray-300 opacity-100 -mt-2" />
-                  <div className={`transition ${openSection.nested === "nested2" ? "opacity-100" : "opacity-0"}`}>
-                    {openSection.nested === "nested2" && (
+                  <div className={`transition ${openSection.nested === "nested1" ? "opacity-100" : "opacity-0"}`}>
+                    {openSection.nested === "nested1" && (
                       <div className="py-2">
                         <p className="text-gray-500">Sections from Source</p>
                         <div className="flex flex-col bg-blue-50 rounded-xl border border-blue-100">
@@ -361,89 +361,6 @@ export const SourceAccordion: React.FC = () => {
                     )}
                   </div>
                 </div>
-                {/* <div className="flex flex-col">
-                  <div
-                    className="px-3 py-4 flex flex-row justify-between cursor-pointer"
-                    onClick={() => toggleNested("nested2")}
-                  >
-                    <p>
-                      <span className="text-gray-500 dark:text-gray-400">1.Source : </span>
-                      <span>BCE-EG-006.dox</span>
-                    </p>
-                    <svg
-                      className={`w-3 h-3 transform ${openSection.nested === "nested2" ? "" : "rotate-180"}`}
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 10 6"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 5 5 1 1 5"
-                      />
-                    </svg>
-                  </div>
-                  <hr className={`border-gray-300 ${openSection.nested === "nested2" ? "opacity-100" : "opacity-0"} transition`} />
-                  <div className={`transition ${openSection.nested === "nested2" ? "opacity-100" : "opacity-0"}`}>
-                    {openSection.nested === "nested2" && (
-                      <div className="p-5">
-                        <p className="text-gray-500 dark:text-gray-400">Sections from Source</p>
-                        <div className="flex flex-col bg-blue-100 rounded-xl">
-                          <div
-                            className="px-3 py-4 flex flex-row justify-between cursor-pointer"
-                            onClick={() => toggleSource("sourceNested2")}
-                          >
-                            <p>4.7 KVM EXTENDERES & KVM SWITCH FOR HIS</p>
-                            <svg
-                              className={`w-3 h-3 transform ${openSection.source === "sourceNested2" ? "" : "rotate-180"}`}
-                              aria-hidden="true"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 10 6"
-                            >
-                              <path
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M9 5 5 1 1 5"
-                              />
-                            </svg>
-                          </div>
-                          <div className={`transition ${openSection.source === "sourceNested2" ? "opacity-100" : "opacity-0"}`}>
-                            {openSection.source === "sourceNested2" && (
-                              <div className="p-5">
-                                <p className="text-gray-500 dark:text-gray-400">
-                                  KVM extenders provide remote connections between HIS machines in server cabinets and
-                                  operator control interfaces, specifying hardware models like CRK-2DTXTD1D/R and KVM -4TDDL/A1.
-                                </p>
-                                <a
-                                  className="text-blue-600 dark:text-blue-500 hover:underline cursor-pointer"
-                                  onClick={() => showPreview("sourceNested2Preview")}
-                                >
-                                  {openSection.preview === "sourceNested2Preview" ? "Hide Preview" : "View Preview"}
-                                </a>
-                                {openSection.preview === "sourceNested2Preview" && (
-                                  <div>
-                                    <div style={{ height: '300px' }} className="py-6 px-[18px] flex flex-col gap-1 bg-[#fff] border-[1px] rounded-xl border-[#ECECEC] card-shadow">
-                                      <div className="flex flex-col gap-2 my-auto">
-                                        <div className="bg-[#F3F4F7] rounded-full">
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                )}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div> */}
                 {/* End: Nested accordion */}
               </div>
             )}
@@ -564,14 +481,14 @@ export const SourceAccordion: React.FC = () => {
                 <div className="flex flex-col">
                   <div
                     className="px-1 py-4 flex flex-row justify-between cursor-pointer"
-                    onClick={() => toggleNested("nested2")}
+                    onClick={() => toggleNested("nested1")}
                   >
                     <p>
                       <span className="text-gray-500">1.Source : </span>
                       <span>BCE-EG-006.dox</span>
                     </p>
                     <svg
-                      className={`w-3 h-3 transform ${openSection.nested === "nested2" ? "" : "rotate-180"}`}
+                      className={`w-3 h-3 transform ${openSection.nested === "nested1" ? "" : "rotate-180"}`}
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -587,8 +504,8 @@ export const SourceAccordion: React.FC = () => {
                     </svg>
                   </div>
                   <hr className="border-gray-300 opacity-100 -mt-2" />
-                  <div className={`transition ${openSection.nested === "nested2" ? "opacity-100" : "opacity-0"}`}>
-                    {openSection.nested === "nested2" && (
+                  <div className={`transition ${openSection.nested === "nested1" ? "opacity-100" : "opacity-0"}`}>
+                    {openSection.nested === "nested1" && (
                       <div className="py-2">
                         <p className="text-gray-500">Sections from Source</p>
                         <div className="flex flex-col bg-blue-50 rounded-xl border border-blue-100">
