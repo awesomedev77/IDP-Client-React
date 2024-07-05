@@ -160,7 +160,7 @@ export const Detail = () => {
           setQueries={setQueries}
         />
         {process?.documents && process?.documents.length > 0 ? (
-          document?.status === "Y" ? (
+          document?.status === "Y" || 1 ? (
             <div className="flex flex-col gap-[8px] h-screen">
               <div className="flex flex-1 justify-end">
                 <div className="p-[30px] flex flex-col gap-[30px] h-full w-[630px] overflow-y-auto">

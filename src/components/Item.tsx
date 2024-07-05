@@ -111,7 +111,8 @@ const Item: React.FC<ItemProps> = ({ item }) => {
       <div className="flex">
         <button
           className="bg-blue-500 flex-grow text-white py-[16px] rounded-full text-[18px] font-bold leading-[13px]"
-          onClick={() => navigate(`/detail/${item.id}`)}
+          onClick={() => {
+            navigate(`/detail/${item.id}`)}}
         >
           Interact With Application Document
         </button>
