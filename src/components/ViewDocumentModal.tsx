@@ -28,12 +28,12 @@ const ViewDocumentModal: React.FC<ViewDocumentModalProps> = ({ show, onClose, cu
   const isPDF = currentDoc.toLowerCase().endsWith('.pdf');
 
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 overflow-y-auto h-full w-full mt-0 flex items-center justify-center z-[100000]">
+    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 overflow-y-auto h-screen w-full mt-0 flex items-center justify-center z-[100000]">
       <div
         className="fixed left-0 top-0 w-screen h-screen"
         onClick={onClose}
       ></div>
-      <div className="relative my-auto mx-auto pb-7 min-h-[550px] w-[900px] shadow-lg rounded-[14px] bg-white">
+      <div className="relative my-auto mx-auto pb-7 h-[849px] w-[649px] shadow-lg rounded-[14px] bg-white">
         <div className="flex items-center px-5 bg-black rounded-tr-[14px] h-[60px] rounded-tl-[14px] justify-between">
           <h2 className="text-2xl font-semibold text-white">
             View Document
@@ -45,9 +45,9 @@ const ViewDocumentModal: React.FC<ViewDocumentModalProps> = ({ show, onClose, cu
             onClick={onClose}
           />
         </div>
-        <div className="relative p-5 flex flex-col items-center h-[440px]">
+        <div className={`relative p-3 flex flex-col items-center ${isPDF ? 'h-[780px]' : 'h-[740px]'}`}>
           <div className="overflow-auto border w-full h-full">
-            <div className="bg-gray-100 overflow-x-auto overflow-y-auto w-full h-full flex items-center justify-center">
+            <div className={`bg-gray-100 overflow-x-auto overflow-y-auto w-full h-full flex items-center justify-center`}>
               {isPDF ? (
                 <object data={`${URL}${getImageUrl(currentDoc)}`} type="application/pdf"
                   width="100%"
@@ -61,10 +61,10 @@ const ViewDocumentModal: React.FC<ViewDocumentModalProps> = ({ show, onClose, cu
                     alt="doc"
                     style={{ transform: `scale(${zoom / 100})`, transformOrigin: 'center' }}
                   />
-                  <div className="absolute -bottom-[30px] left-4 px-4 flex items-center space-x-2 rounded-md bg-white border p-1 shadow-lg">
+                  <div className="absolute -bottom-[35px] left-4 px-4 flex items-center space-x-2 rounded-md bg-white border p-1 shadow-lg">
                     <span className="text-base font-semibold">0{currentDoc.split('/').length - 1}/0{currentDoc.split('/').length - 1}</span>
                   </div>
-                  <div className="absolute -bottom-[35px] right-4 flex items-center space-x-2 bg-white border shadow-lg p-2 rounded-md">
+                  <div className="absolute -bottom-[40px] right-4 flex items-center space-x-2 bg-white border shadow-lg p-2 rounded-md">
                     <button
                       className="flex items-center justify-center text-black hover:text-blue-500"
                       onClick={handleZoomOut}
