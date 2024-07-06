@@ -23,7 +23,7 @@ const ViewDocumentModal: React.FC<ViewDocumentModalProps> = ({ show, onClose, cu
     setZoom((prevZoom) => Math.max(prevZoom - 10, 50)); // Minimum 50%
   };
   const getImageUrl = (imgPath: string) => {
-    return imgPath.split('/')[1]
+    return imgPath.split('\\')[1]
   };
   const isPDF = currentDoc.toLowerCase().endsWith('.pdf');
 
