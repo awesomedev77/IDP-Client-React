@@ -33,38 +33,7 @@ export const ProcessItem: React.FC<Props> = ({ no, process }) => {
           {process.processDescription}
         </span>
       </td>
-      <td>
-        <div
-          className={`border-[1px] px-4 py-2 rounded-xl my-auto ml-6 max-w-[150px] 
-        ${
-          process.documents.length === 0
-            ? "bg-[#F7F8F9] border-[#E0E2E9]"
-            : status
-            ? "bg-[#FFF1E8] border-[#EB744166]"
-            : "bg-[#E7F0FF] border-[#4182EB66]"
-        }`}
-        >
-          <p
-            className={`text-[14px] font-semibold leading-normal text-nowrap text-center 
-          ${
-            process.documents.length === 0
-              ? "text-[#656F93]"
-              : status
-              ? "text-[#EB7441]"
-              : "text-[#4182EB]"
-          }`}
-          >
-            {process.documents.length === 0
-              ? "No Documents"
-              : status
-              ? "Processed"
-              : "Uploaded"}
-          </p>
-        </div>
-      </td>
-      <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-        {format(parseISO(process.createdAt), "dd MMM, yyyy, hh:mm aaa")}
-      </td>
+      
       <td className="px-6 py-4 text-right">
         <div className="flex gap-3">
           <img

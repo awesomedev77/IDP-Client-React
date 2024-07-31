@@ -21,8 +21,9 @@ import { ArrowUpIcon } from "../components/icons/arrowup";
 import { ArrowDownIcon } from "../components/icons/arrowdown";
 import { SettingIcon } from "../components/icons/setting";
 import FilterModal from "../components/Home/FilterModal";
+import { ProcessesCreateModal } from "../components/ProcessesCreateModal";
 
-const Home: React.FC = () => {
+export const Processes: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [filterModal, setFilterModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -187,67 +188,10 @@ const Home: React.FC = () => {
               placeholder="Search..."
               className="w-[360px] bg-transparent text-[#656F93] placeholder:text-[#656F93] text-[18px] grow py-0 outline-none leading-[13px]"
             />
-            <div className="w-[1px] h-6 border-r-[1px] opacity-20 border-[#656F93] mx-4"></div>
-            {viewMode === "card" && (
-              <>
-                <div
-                  className="flex gap-[5.6px] cursor-pointer"
-                  onClick={handleFileNameOrder}
-                >
-                  File Name
-                  <div className="flex flex-col justify-center gap-1 ">
-                    <ArrowUpIcon
-                      selected={sort === "ASC" && sortBy === "fileName"}
-                    />
-                    <ArrowDownIcon
-                      selected={sort === "DESC" && sortBy === "fileName"}
-                    />
-                  </div>
-                </div>
-                <div className="w-[1px] h-6  border-r-[1px] opacity-20 border-[#656F93] mx-4"></div>
-                <div
-                  className="flex  gap-[5.6px] cursor-pointer"
-                  onClick={handleDateOrder}
-                >
-                  Created At
-                  <div className="flex flex-col justify-center gap-1 ">
-                    <ArrowUpIcon
-                      selected={sort === "ASC" && sortBy === "createdAt"}
-                    />
-                    <ArrowDownIcon
-                      selected={sort === "DESC" && sortBy === "createdAt"}
-                    />
-                  </div>
-                </div>
-                <div className="w-[1px] h-6  border-r-[1px] opacity-20 border-[#656F93] mx-4"></div>
-              </>
-            )}
-            <div className="cursor-pointer" onClick={() => setFilterModal(true)}>
-              <SettingIcon />
-            </div>
+            
           </div>
 
           <div className="flex-grow"></div>
-          {/* <SelectSearch
-            placeholder="Filter Type"
-            emptyMessage="empty"
-            search
-            value={typeFilter}
-            onChange={(value) => setTypeFilter(value as string)}
-            options={typeOptions}
-            className="select-search"
-          /> */}
-          {/* <div className="mx-3">
-            <SelectSearch
-              placeholder="Filter Process"
-              emptyMessage="empty"
-              search
-              value={processFilter}
-              onChange={(value) => setProcessFilter(value as string)}
-              options={processOptions}
-              className="select-search"
-            />
-          </div> */}
           <button
             className={`${
               viewMode !== "card" ? "text-gray-600" : "text-blue-500"
@@ -277,7 +221,7 @@ const Home: React.FC = () => {
                 alt="upload"
                 className="w-[20px] h-[20px] me-[10px]"
               />
-              Upload Document
+              Create Process
             </button>
           )}
         </div>
@@ -373,7 +317,7 @@ const Home: React.FC = () => {
           />
         </div>
       </div>
-      <ModalForm key={Math.random()} show={showModal} onClose={handleClose} />
+      <ProcessesCreateModal key={Math.random()} show={showModal} onClose={handleClose} />
       <FilterModal
         key={Math.random()}
         show={filterModal}
@@ -389,5 +333,3 @@ const Home: React.FC = () => {
     </div>
   );
 };
-
-export default Home;

@@ -12,13 +12,13 @@ import { CompactIcon } from "../components/icons/compact";
 import { SheetsIcon } from "../components/icons/sheets";
 import ProcessCardItem from "../components/Process/ProcessCardItem";
 
-export const DocumentProcess: React.FC = () => {
+export const tmpDocumentProcess: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [items, setItems] = useState<Process[]>([]);
   const { isAuthenticated } = useAuthStore();
-  const [viewMode, setViewMode] = useState("table");
+  const [viewMode, setViewMode] = useState("card");
   const [sortBy, setSortBy] = useState("createdAt");
   const [sort, setSort] = useState("DESC");
   const navigate = useNavigate();
@@ -203,7 +203,43 @@ export const DocumentProcess: React.FC = () => {
                       <th scope="col" className="px-6 py-3">
                         Process Description
                       </th>
-                      
+                      <th scope="col" className="px-6 py-3">
+                        Documents Status
+                      </th>
+                      <th scope="col" className="px-6 py-3">
+                        Created at
+                        {sort === "ASC" && sortBy === "createdAt" ? (
+                          <div style={styles.arrowContainer}>
+                            <span
+                              style={styles.upArrow}
+                              onClick={() =>
+                                handleSortClick("ASC", "createdAt")
+                              }
+                            ></span>
+                            <span
+                              style={styles.downArrow}
+                              onClick={() =>
+                                handleSortClick("DESC", "createdAt")
+                              }
+                            ></span>
+                          </div>
+                        ) : (
+                          <div style={styles.arrowContainer}>
+                            <span
+                              style={styles.upArrowNo}
+                              onClick={() =>
+                                handleSortClick("ASC", "createdAt")
+                              }
+                            ></span>
+                            <span
+                              style={styles.downArrowYes}
+                              onClick={() =>
+                                handleSortClick("DESC", "createdAt")
+                              }
+                            ></span>
+                          </div>
+                        )}
+                      </th>
                       <th scope="col" className="px-6 py-3">
                         <span className="">Actions</span>
                       </th>

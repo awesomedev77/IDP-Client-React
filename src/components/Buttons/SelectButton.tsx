@@ -6,11 +6,13 @@ type processOptions = { name: string; value: string };
 type props = {
   options: processOptions[];
   onClick?: () => void;
+  placeHolder: string;
   onHandleOptionChange: (selectedOption: string) => void;
 };
 
 export const SelectButton: React.FC<props> = ({
   options,
+  placeHolder,
   onHandleOptionChange,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -25,11 +27,11 @@ export const SelectButton: React.FC<props> = ({
   };
 
   return (
-    <div ref={optionRef} className="w-[40%]">
+    <div ref={optionRef} className="">
       <div className="flex items-center bg-gray-100 border border-gray-200 rounded-3xl h-9 py-1 px-3">
         <input
           className=" w-[93%] bg-gray-100 outline-none"
-          placeholder="Select Process Name"
+          placeholder= {placeHolder}
           onMouseDown={() => {
             setShowOptions(true);
             document.addEventListener("mousedown", handleClickOutside);
@@ -45,7 +47,9 @@ export const SelectButton: React.FC<props> = ({
             (option, index) =>
               option.name.toLowerCase().includes(process.toLowerCase()) && (
                 <p
-                  className="border border-white border-b-gray-300 text-[19px] hover:bg-gray-100 cursor-pointer"
+                  className={`border border-white text-[19px] hover:bg-gray-100 cursor-pointer
+                    ${index === options.length-1 ? "border-b-0": "border-b-gray-300"}
+                    `}
                   key={option.value}
                   onClick={(e) => {
                     setProcess(option.name);

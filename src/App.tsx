@@ -13,6 +13,7 @@ import AdminRoute from "./components/AdminRoute";
 import { Admin } from "./pages/Admin";
 import { DocumentProcess } from "./pages/Process";
 import { DocumentType } from "./pages/DocumentType";
+import { Processes } from "./pages/Processes";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           </Route>
           <Route element={<PrivateRoute />}>
             <Route path="/process" element={<DocumentProcess />} />
+            <Route path="/processes" element={<Processes />} />
             <Route path="/" element={<Home />} />
             <Route path="/details/:id" element={<Details />} />
             <Route path="/detail/:id" element={<Detail />} />

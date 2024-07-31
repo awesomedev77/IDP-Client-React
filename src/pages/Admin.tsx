@@ -87,7 +87,7 @@ export const Admin: React.FC = () => {
     <div className="flex h-screen bg-[#FAFAFA]">
       <Sidebar />
       <div className="flex flex-col grow py-5 gap-[38px]">
-        <Header query={query} setQuery={setQuery} />
+        <Header />
         <div className="flex justify-between">
           <p className="text-[24px] font-bold ms-[30px]">IDP Loan Users</p>
           <button

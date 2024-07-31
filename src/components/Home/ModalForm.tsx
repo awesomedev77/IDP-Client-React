@@ -1,12 +1,10 @@
 import React, { useEffect, useState, useCallback } from "react";
-import close_circle from "../assets/icons/close-circle.svg";
-import { UploadIcon } from "../components/icons/upload";
-import api from "../api/axios";
-import { Process, Type } from "../utils/interface";
-import "react-select-search/style.css";
-import "../Select.css";
+import close_circle from "../../assets/icons/close-circle.svg";
+import { UploadIcon } from "../icons/upload";
+import api from "../../api/axios";
+import { Process, Type } from "../../utils/interface";
 import DocumentList from "./DocumentList";
-import { isNotEmpty } from "../utils/validators";
+import { isNotEmpty } from "../../utils/validators";
 import { useDropzone } from "react-dropzone";
 
 type ModalFormProps = {
@@ -65,15 +63,6 @@ const ModalForm: React.FC<ModalFormProps> = ({ show, onClose }) => {
         }
       });
   }, []);
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const newFiles = Array.from(event.target.files).map((file: File) => ({
-        file,
-        documentType: [],
-      }));
-      setFiles([...files, ...newFiles]);
-    }
-  };
 
   const handleRemoveFile = (filename: string) => {
     setFiles(files.filter((file) => file.file.name !== filename));

@@ -1,8 +1,8 @@
 import React from "react";
-import docIcon from "../assets/icons/doc.svg";
-import trashIcon from "../assets/icons/trash.svg";
-import { SelectButton } from "./Buttons/SelectButton";
-import { SearchSelectButton } from "./Buttons/SearchSelectButton";
+import docIcon from "../../assets/icons/doc.svg";
+import trashIcon from "../../assets/icons/trash.svg";
+import { SelectButton } from "../Buttons/SelectButton";
+import { SearchSelectButton } from "../Buttons/SearchSelectButton";
 
 type ExtendedFile = { file: File; documentType?: string[] };
 type typeOptions = { name: string; value: string };
@@ -56,10 +56,11 @@ const DocumentList: React.FC<ListProps> = ({
         </div>
       ))}
       {files.length !== 0 && (
-        <div className="mt-5">
-          <p className="font-semibold mx-2 text-[18px]">Process Name</p>
+        <div className="mt-5 w-[40%]">
+          <p className="font-semibold mx-2 text-[18px]">Process Type Name</p>
           <SelectButton
             options={processOptions}
+            placeHolder={"Select Process Type Name"}
             onHandleOptionChange={onHandleOptionChange}
           />
         </div>
